@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
 from django.shortcuts import render, get_object_or_404
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
@@ -9,3 +11,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
 ]
 
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
